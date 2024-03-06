@@ -7,30 +7,29 @@ import {
 } from './styles'
 import arrowUpRight from '../../assets/arrow-up-right.svg'
 import githubIcon from '../../assets//github.svg'
+import { ProfileData } from '../../pages/Home'
 
-export function Profile() {
+interface ProfileProps {
+  dataProfile: ProfileData
+}
+
+export function Profile({ dataProfile }: ProfileProps) {
   return (
     <InfoContainer>
-      <img
-        src="https://avatars.githubusercontent.com/u/54542736?s=400&u=c8e4f150bc854fc60429ea2d9fa884d52f9e22a8&v=4"
-        alt=""
-      />
+      <img src={dataProfile.avatarUrl} alt="" />
       <ProfileContainer>
         <ProfileTitle>
-          <h1>Guilherme Santos</h1>
-          <a href="">
+          <h1>{dataProfile.name}</h1>
+          <a href="https://github.com/" target="_blank" rel="noreferrer">
             GITBHUB
             <img src={arrowUpRight} alt="" />
           </a>
         </ProfileTitle>
-        <ProfileDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem ab
-          atque facilis illo, nam architecto consequatur fugiat magnam illum
-        </ProfileDescription>
+        <ProfileDescription>{dataProfile.bio}</ProfileDescription>
         <ProfileLinks>
-          <a href="">
+          <a href={dataProfile.githubUrl}>
             <img src={githubIcon} alt="" />
-            guilhermecandidosantos
+            {dataProfile.login}
           </a>
         </ProfileLinks>
       </ProfileContainer>

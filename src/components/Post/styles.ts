@@ -10,6 +10,7 @@ export const PostContainer = styled.div`
   background: ${(props) => props.theme['base-post']};
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
 `
 
 export const PostTitleContainer = styled.div`

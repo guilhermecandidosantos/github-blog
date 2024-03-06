@@ -1,17 +1,37 @@
+import { formatDistanceToNow } from 'date-fns'
+import { Issues } from '../../context/IssuesContext'
 import { PostContainer, PostContent, PostTitleContainer } from './styles'
+import Markdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import { ptBR } from 'date-fns/locale'
+import { useNavigate } from 'react-router-dom'
 
-export function Post() {
+interface PostProps {
+  issue: Issues
+}
+
+export function Post({ issue }: PostProps) {
+  const date = formatDistanceToNow(issue.createdAt, {
+    addSuffix: true,
+    locale: ptBR,
+  })
+
+  const navigate = useNavigate()
+
+  function handleViewIssueComplete() {
+    navigate(`/issues/${issue.id}`)
+  }
+
   return (
-    <PostContainer>
+    <PostContainer onClick={handleViewIssueComplete}>
       <PostTitleContainer>
-        <h1>JavaScript data types and data structures</h1>
-        <span>Há 1 dia</span>
+        <h1>{issue.title}</h1>
+        <span>{date}</span>
       </PostTitleContainer>
       <PostContent>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. Thes...
+        <Markdown rehypePlugins={[rehypeRaw]}>
+          {issue.content.slice(0, 228) + '...'}
+        </Markdown>
       </PostContent>
     </PostContainer>
   )

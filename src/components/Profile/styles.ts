@@ -19,6 +19,7 @@ export const InfoContainer = styled.div`
 
 export const ProfileContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
 `
